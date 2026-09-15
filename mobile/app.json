@@ -16,7 +16,10 @@
     },
     "android": {
       "package": "com.hintsight.mobile",
-      "permissions": ["CAMERA", "RECORD_AUDIO"],
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -36,7 +39,8 @@
           "microphonePermission": "HINTSight records short video clips that include audio by default.",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-status-bar"
     ]
   }
 }
