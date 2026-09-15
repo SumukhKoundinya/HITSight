@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: hintsight-api
+    runtime: docker
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: GOOGLE_MAPS_API_KEY
+        sync: false

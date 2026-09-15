@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "HINTSight",
+    "slug": "hintsight-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hintsight.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "HINTSight needs the camera to record the head impulse test.",
+        "NSMicrophoneUsageDescription": "HINTSight records short video clips that include audio by default."
+      }
+    },
+    "android": {
+      "package": "com.hintsight.mobile",
+      "permissions": ["CAMERA", "RECORD_AUDIO"],
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "HINTSight needs the camera to record the head impulse test.",
+          "microphonePermission": "HINTSight records short video clips that include audio by default.",
+          "recordAudioAndroid": true
+        }
+      ]
+    ]
+  }
+}

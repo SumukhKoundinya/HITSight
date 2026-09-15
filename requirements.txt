@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+requests
+numpy<2
+pandas
+scipy
+scikit-learn
+imbalanced-learn
+xgboost
+opencv-python-headless
+mediapipe
+tensorflow==2.15.1
+torch

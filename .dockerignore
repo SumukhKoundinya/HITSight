@@ -1,0 +1,10 @@
+.git
+.gitignore
+.venv
+__pycache__
+.pytest_cache
+outputs
+*.log
+*.ipynb_checkpoints
+mobile/node_modules
+mobile/.expo
