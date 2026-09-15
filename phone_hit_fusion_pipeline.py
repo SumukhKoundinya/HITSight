@@ -27,8 +27,8 @@ import torch
 import torch.nn as nn
 from scipy.signal import savgol_filter
 
-from head_tracking import HeadTracker
 from hitsight_cnn import load_cnn
+from vhit_pipeline import FaceTracker
 
 
 LEGACY_LEFT_CROP = (2, 120, 160, 320)
@@ -123,7 +123,7 @@ class PhoneHITFusionPipeline:
             raise ValueError("side must be 'left' or 'right'")
         self.side = side
         self.eye_segmenter = KerasEyeSegmenter(segmentation_model)
-        self.head_tracker = HeadTracker()
+        self.head_tracker = FaceTracker()
         self.cnn, self.cnn_mean, self.cnn_std, self.cnn_classes = load_cnn("cnn4_tcn_best.pt")
 
         checkpoint = torch.load(fusion_checkpoint, map_location="cpu", weights_only=False)
@@ -150,8 +150,8 @@ class PhoneHITFusionPipeline:
         return frame[y1:y2, x1:x2]
 
     def _measure_frame(self, frame: np.ndarray, timestamp_s: float) -> Optional[FrameMeasurement]:
-        pose = self.head_tracker.process(frame)
-        if pose is None:
+        tracking = self.head_tracker.process_frame(frame, int(timestamp_s * 1000))
+        if tracking is None or tracking["head_yaw"] is None:
             return None
         left_crop = self._crop(frame, LEGACY_LEFT_CROP)
         right_crop = self._crop(frame, LEGACY_RIGHT_CROP)
@@ -160,7 +160,7 @@ class PhoneHITFusionPipeline:
         centroid = left_centroid if self.side == "left" else right_centroid
         if centroid is None or left_centroid is None or right_centroid is None:
             return None
-        return FrameMeasurement(timestamp_s, pose["yaw"], centroid[0], centroid[1])
+        return FrameMeasurement(timestamp_s, tracking["head_yaw"], centroid[0], centroid[1])
 
     @staticmethod
     def _velocity(values: np.ndarray, timestamps: np.ndarray) -> np.ndarray:

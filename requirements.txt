@@ -10,5 +10,5 @@ imbalanced-learn
 xgboost
 opencv-python-headless
 mediapipe
-tensorflow==2.15.1
+tensorflow==2.16.1
 torch

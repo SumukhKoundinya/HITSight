@@ -50,7 +50,7 @@ The phone and laptop must be on the same Wi-Fi for the local URL. The app sends 
 
 ## Important Runtime Notes
 
-- The backend requires Python 3.11 because TensorFlow loads `iris_model (1).keras`.
+- The backend requires Python 3.12 because TensorFlow loads `iris_model (1).keras`.
 - The late-fusion checkpoint must be retrained with `meta_dim=10`.
 - This is a screening prototype, not a diagnostic device.
 - Do not store uploaded patient videos permanently unless privacy, consent, and retention controls are implemented.
