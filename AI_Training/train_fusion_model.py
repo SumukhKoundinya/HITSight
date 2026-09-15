@@ -48,8 +48,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # STEP 2: LOAD FROZEN PRETRAINED CNN
 # ============================================================
 
-cnn, cnn_mean, cnn_std, classes = load_cnn("cnn4_tcn_best.pt", device=device)
-checkpoint = torch.load("cnn4_tcn_best.pt", map_location=device, weights_only=False)
+cnn, cnn_mean, cnn_std, classes = load_cnn("AI_Training/cnn4_tcn_best.pt", device=device)
+checkpoint = torch.load("AI_Training/cnn4_tcn_best.pt", map_location=device, weights_only=False)
 
 print(f"Loaded frozen CNN (val_acc={checkpoint['val_accuracy']:.4f}, classes={classes})")
 
@@ -57,8 +57,8 @@ print(f"Loaded frozen CNN (val_acc={checkpoint['val_accuracy']:.4f}, classes={cl
 # STEP 3: LOAD vHIT SIGNAL DATA AND COMPUTE EMBEDDINGS
 # ============================================================
 
-X_df = pd.read_csv("_left_ready (1).csv")
-y_df = pd.read_csv("_labels_ready_new (1).csv")
+X_df = pd.read_csv("AI_Training/_left_ready (1).csv")
+y_df = pd.read_csv("AI_Training/_labels_ready_new (1).csv")
 
 X_df = X_df.loc[:, ~X_df.columns.astype(str).str.startswith("Unnamed")]
 y_raw = y_df["Labels"].astype(str).values
@@ -88,7 +88,7 @@ print(f"CNN embeddings ready: {cnn_embeddings.shape}")
 # STEP 4: LOAD CLINICAL RISK-FACTOR DATA (same engineering as trainRiskFactors.py)
 # ============================================================
 
-df = pd.read_csv("healthcare-dataset-stroke-data.csv")
+df = pd.read_csv("AI_Training/healthcare-dataset-stroke-data.csv")
 clinical_columns = [
     "gender", "age", "hypertension", "heart_disease", "ever_married",
     "work_type", "Residence_type", "avg_glucose_level", "bmi", "smoking_status", "stroke",
@@ -332,7 +332,7 @@ torch.save(
         "val_accuracy": best_acc,
         "config": best_cfg,
     },
-    "hintsight_fusion_model.pt",
+    "AI_Training/hintsight_fusion_model.pt",
 )
 print("\nSaved fused model to hintsight_fusion_model.pt")
 
@@ -369,5 +369,5 @@ plt.xlabel("Epoch")
 plt.ylabel("F1 Score (%)")
 
 plt.tight_layout()
-plt.savefig("HINTSight_Fusion_Performance.png", dpi=300, bbox_inches="tight")
-print("Saved diagnostic plot to HINTSight_Fusion_Performance.png")
+plt.savefig("graphs/HINTSight_Fusion_Performance.png", dpi=300, bbox_inches="tight")
+print("Saved diagnostic plot to graphs/HINTSight_Fusion_Performance.png")

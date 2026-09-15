@@ -251,7 +251,7 @@ def build_signal_from_records(records: list[dict], side: str = "left"):
 
 
 class VHITClassifier:
-    def __init__(self, checkpoint_path="cnn4_tcn_best.pt", device=None):
+    def __init__(self, checkpoint_path="AI_Training/cnn4_tcn_best.pt", device=None):
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model, self.mean, self.std, self.classes = load_cnn(checkpoint_path, device=self.device)
 

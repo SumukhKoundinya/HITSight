@@ -99,7 +99,7 @@ class TCN1D(nn.Module):
         return x
 
 
-def load_cnn(checkpoint_path="cnn4_tcn_best.pt", device="cpu"):
+def load_cnn(checkpoint_path="AI_Training/cnn4_tcn_best.pt", device="cpu"):
     """Loads the frozen pretrained TCN1D along with its normalization stats and class names."""
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
     classes = list(checkpoint["classes"])

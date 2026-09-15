@@ -10,7 +10,7 @@ from xgboost import XGBClassifier
 # ==========================================
 # STEP 1: LOAD AND CLEAN DATA
 # ==========================================
-df = pd.read_csv("healthcare-dataset-stroke-data.csv")
+df = pd.read_csv("AI_Training/healthcare-dataset-stroke-data.csv")
 
 clinical_columns = ['gender', 'age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi', 'stroke']
 df_clinical = df[clinical_columns].copy()
@@ -84,10 +84,10 @@ print(classification_report(y_test, y_pred))
 print(f" New Area Under the ROC Curve (AUROC): {roc_auc_score(y_test, y_prob):.4f}\n")
 
 # Overwrite with your high-performing model artifacts
-with open("hintsight_stroke_model.pkl", "wb") as model_file:
+with open("AI_Training/hintsight_stroke_model.pkl", "wb") as model_file:
     pickle.dump(model, model_file)
 
-with open("hintsight_scaler.pkl", "wb") as scaler_file:
+with open("AI_Training/hintsight_scaler.pkl", "wb") as scaler_file:
     pickle.dump(scaler, scaler_file)
 
 print(" Success! High-performance model and scaler updated.")
@@ -168,7 +168,7 @@ plt.ylabel("True Label", fontsize=12, labelpad=10)
 plt.subplots_adjust(wspace=0.4, top=0.85, bottom=0.15, left=0.08, right=0.95)
 
 # Save with tight bounding parameters so no labels are chopped off by the margins
-plt.savefig('ISEF_Performance_Graphs.png', dpi=300, bbox_inches='tight')
+plt.savefig('graphs/ISEF_Performance_Graphs.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 print("\n The 3-panel presentation graph has been saved as 'ISEF_Performance_Graphs.png'!")
@@ -221,7 +221,7 @@ for bar, importance in zip(bars, feature_importance.values * 100):
     )
 
 plt.tight_layout()
-plt.savefig('HINTSight_Metadata_Feature_Importance.png', dpi=300, bbox_inches='tight')
+plt.savefig('graphs/HINTSight_Metadata_Feature_Importance.png', dpi=300, bbox_inches='tight')
 plt.close()
 
 print("Saved feature influence graph to 'HINTSight_Metadata_Feature_Importance.png'!")
@@ -297,6 +297,6 @@ for bar, score in zip(bars, ablation_f1_scores.values):
     )
 
 plt.tight_layout()
-plt.savefig('HINTSight_Metadata_Factor_Ablation.png', dpi=300, bbox_inches='tight')
+plt.savefig('graphs/HINTSight_Metadata_Factor_Ablation.png', dpi=300, bbox_inches='tight')
 plt.close()
 print("Saved F1 leave-one-factor-out graph to 'HINTSight_Metadata_Factor_Ablation.png'!")

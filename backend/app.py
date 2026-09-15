@@ -51,8 +51,8 @@ _pipeline: Optional[PhoneHITFusionPipeline] = None
 def load_pipeline():
     global _pipeline
     _pipeline = PhoneHITFusionPipeline(
-        segmentation_model=os.path.join(REPO_ROOT, "iris_model (1).keras"),
-        fusion_checkpoint=os.path.join(REPO_ROOT, "hintsight_fusion_model.pt"),
+        segmentation_model=os.path.join(REPO_ROOT, "AI_Training", "iris_model (1).keras"),
+        fusion_checkpoint=os.path.join(REPO_ROOT, "AI_Training", "hintsight_fusion_model.pt"),
     )
 
 

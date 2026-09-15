@@ -39,7 +39,7 @@ class LateFusionMLP(nn.Module):
 
 
 class HintsightPipeline:
-    def __init__(self, cnn_checkpoint="cnn4_tcn_best.pt", fusion_checkpoint="hintsight_fusion_model.pt", device=None):
+    def __init__(self, cnn_checkpoint="AI_Training/cnn4_tcn_best.pt", fusion_checkpoint="AI_Training/hintsight_fusion_model.pt", device=None):
         self.device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         self.vhit_classifier = VHITClassifier(cnn_checkpoint, device=self.device)

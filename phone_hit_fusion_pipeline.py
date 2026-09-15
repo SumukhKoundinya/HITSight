@@ -118,13 +118,13 @@ class FrameMeasurement:
 
 
 class PhoneHITFusionPipeline:
-    def __init__(self, segmentation_model: str, fusion_checkpoint: str = "hintsight_fusion_model.pt", side: str = "left"):
+    def __init__(self, segmentation_model: str, fusion_checkpoint: str = "AI_Training/hintsight_fusion_model.pt", side: str = "left"):
         if side not in ("left", "right"):
             raise ValueError("side must be 'left' or 'right'")
         self.side = side
         self.eye_segmenter = KerasEyeSegmenter(segmentation_model)
         self.head_tracker = FaceTracker()
-        self.cnn, self.cnn_mean, self.cnn_std, self.cnn_classes = load_cnn("cnn4_tcn_best.pt")
+        self.cnn, self.cnn_mean, self.cnn_std, self.cnn_classes = load_cnn("AI_Training/cnn4_tcn_best.pt")
 
         checkpoint = torch.load(fusion_checkpoint, map_location="cpu", weights_only=False)
         if checkpoint["meta_dim"] != 10:
@@ -251,7 +251,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run phone HIT video through segmentation, tracking, HIT CNN, and fusion")
     parser.add_argument("video")
     parser.add_argument("--segmentation-model", required=True)
-    parser.add_argument("--fusion-checkpoint", default="hintsight_fusion_model.pt")
+    parser.add_argument("--fusion-checkpoint", default="AI_Training/hintsight_fusion_model.pt")
     parser.add_argument("--side", choices=["left", "right"], default="left")
     parser.add_argument("--duration", type=float, default=10.0)
     parser.add_argument("--age", type=float, required=True)

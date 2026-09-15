@@ -4,7 +4,7 @@ __pycache__/
 .pytest_cache/
 *.log
 outputs/
-mobile/node_modules/
-mobile/.expo/
+Frontend/mobile/node_modules/
+Frontend/mobile/.expo/
 .env
 mobile/.env

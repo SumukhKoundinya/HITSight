@@ -3,9 +3,9 @@
 ## Backend on Render
 
 1. Push this repository to GitHub, including these runtime files:
-   - `cnn4_tcn_best.pt`
-   - `hintsight_fusion_model.pt`
-   - `iris_model (1).keras`
+   - `AI_Training/cnn4_tcn_best.pt`
+   - `AI_Training/hintsight_fusion_model.pt`
+   - `AI_Training/iris_model (1).keras`
    - `face_landmarker.task`
 2. In Render, choose **New > Blueprint** and select the repository.
 3. Render reads `render.yaml`, builds the `Dockerfile`, and starts FastAPI.
@@ -34,7 +34,7 @@ Then open `http://localhost:8000/health`.
 Set the deployed API URL before starting or building Expo:
 
 ```powershell
-cd mobile
+cd Frontend/mobile
 $env:EXPO_PUBLIC_API_BASE_URL = "https://YOUR_SERVICE.onrender.com"
 npx.cmd expo start
 ```
@@ -42,6 +42,7 @@ npx.cmd expo start
 For a development phone test, use the laptop Wi-Fi address instead:
 
 ```powershell
+cd Frontend/mobile
 $env:EXPO_PUBLIC_API_BASE_URL = "http://YOUR_LAPTOP_WIFI_IP:8000"
 npx.cmd expo start
 ```
