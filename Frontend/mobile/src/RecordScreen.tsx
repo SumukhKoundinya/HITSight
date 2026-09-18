@@ -1,4 +1,5 @@
 import { CameraView, useCameraPermissions, useMicrophonePermissions } from "expo-camera";
+import * as DocumentPicker from "expo-document-picker";
 import { useEffect, useRef, useState } from "react";
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -42,19 +43,30 @@ export default function RecordScreen({ durationSec, side, onRecorded, onCancel }
     }
   };
 
-  const uploadVideoFile = () => {
-    if (typeof document === "undefined") return;
+  const uploadVideoFile = async () => {
+    if (Platform.OS === "web") {
+      if (typeof document === "undefined") return;
 
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "video/*";
-    input.onchange = async () => {
-      const file = input.files?.[0];
-      if (!file) return;
-      const uri = URL.createObjectURL(file);
-      onRecorded(uri);
-    };
-    input.click();
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "video/*";
+      input.onchange = () => {
+        const file = input.files?.[0];
+        if (!file) return;
+        onRecorded(URL.createObjectURL(file));
+      };
+      input.click();
+      return;
+    }
+
+    const result = await DocumentPicker.getDocumentAsync({
+      type: "video/*",
+      copyToCacheDirectory: true,
+      multiple: false,
+    });
+    if (!result.canceled && result.assets[0]?.uri) {
+      onRecorded(result.assets[0].uri);
+    }
   };
 
   if (Platform.OS === "web") {
